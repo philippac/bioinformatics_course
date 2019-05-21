@@ -1,0 +1,89 @@
+---
+title: "Advanced Bioinformatics 2019 Assesment"
+author: "p1504814" 
+output: 
+  html_document:
+    keep_md: true
+---
+Task 1:
+```{r}
+sum(5:55)
+```
+Task 2:
+```{r}
+sumfun <- function(n) {sum(5:n)}
+
+sumfun(10)
+sumfun(20)
+sumfun(100)
+```
+Task 3:
+
+```{r}
+
+Fibonacci_seq <- numeric(12)
+Fibonacci_seq[1] <- 1
+Fibonacci_seq[2] <- 1
+for (i in 3:12) { 
+   Fibonacci_seq[i] <- Fibonacci_seq[i-1]+Fibonacci_seq[i-2]
+}
+print("The first 12 numbers of the Fibonacci sequence are:")
+print(Fibonacci_seq)
+```
+
+Task 4:
+```{r}
+
+library(ggplot2)
+
+Gears <- as.factor((mtcars[,10]))
+
+
+ggplot(mtcars, aes(x=Gears, y=mpg, color=Gears))+ 
+geom_boxplot()+
+scale_color_brewer(palette="BuPu")
+    
+
+```
+
+Task 5: 
+```{r}
+distance<-lm(dist~speed,cars)
+summary(distance)
+```
+Intercept= -17.5791, slope= 3.9324, standard deviation= 0.4155(speed) and 6.7584(dist)
+
+Task 6:
+
+```{r}
+plot(cars, col='lightskyblue',pch=20, cex=2, main="Relationship between Speed and Stopping Distance ", "Speed (mph)", "Stopping Distance (feet)")
+abline(-17.5791, 3.9324)
+
+```
+Task 7:
+```{r}
+
+new_speed <- cars$speed * (5280/3600)
+
+line<-lm(dist ~ 0+ new_speed + I(new_speed^2),cars)
+
+
+summary(line)
+
+```
+
+
+
+Yes we get reasonable results. 0.84479 is a realistic average reaction speed.
+
+
+
+```{r}
+y <- cars$dist
+x <- cars$new_speed
+
+ggplot(cars,aes(new_speed,dist)) + 
+    geom_point() + 
+    geom_smooth(method="lm", formula="y~0+x+I(x^2)")
+```
+
